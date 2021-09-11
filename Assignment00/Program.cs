@@ -4,9 +4,20 @@ namespace Assignment00
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Enter a year: ");
+            int inputYear = Convert.ToInt32(Console.ReadLine());
+            Program p = new Program();
+
+            if (p.IsLeapYear(inputYear))
+            {
+                Console.WriteLine("yay");
+            }
+            else
+            {
+                Console.WriteLine("nay");
+            }
         }
 
         public bool IsLeapYear(int year)

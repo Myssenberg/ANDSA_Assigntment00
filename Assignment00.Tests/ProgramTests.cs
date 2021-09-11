@@ -1,12 +1,13 @@
 using System;
 using Xunit;
+using System.IO;
 
 namespace Assignment00.Tests
 {
     public class ProgramTests
     {
         [Fact]
-        public void IsLeapYear_accepts_divisible_by_four()
+        public void IsLeapYear_accepts_1996_because_it_is_divisible_by_four()
         {
             //Arrange
             Program test = new Program();
@@ -19,7 +20,7 @@ namespace Assignment00.Tests
         }
 
 		[Fact]
-        public void IsLeapYear_doesnt_accept_not_divisible_by_four()
+        public void IsLeapYear_doesnt_accept_1995_bc_its_not_divisible_by_four()
         {
             //Arrange
             Program test = new Program();
@@ -32,7 +33,7 @@ namespace Assignment00.Tests
         }
 
 		[Fact]
-        public void IsLeapYear_doesnt_accept_divisible_by_100()
+        public void IsLeapYear_doesnt_accept_1900_bc_its_divisible_by_100()
         {
             //Arrange
             Program test = new Program();
@@ -45,7 +46,7 @@ namespace Assignment00.Tests
         }
 
 		[Fact]
-        public void IsLeapYear_accepts_divisible_by_400()
+        public void IsLeapYear_accepts_2000_bc_its_divisible_by_400()
         {
             //Arrange
             Program test = new Program();
@@ -55,6 +56,44 @@ namespace Assignment00.Tests
             
             //Assert
             Assert.True(result);
+        }
+
+        [Fact]
+        public void Main_console_prints_yay_when_user_inputs_2000_bc_its_a_leapyear()
+        {
+            //Arrange
+            var writer = new StringWriter();
+            var reader = new StringReader("2000");
+            Console.SetOut(writer);
+            Console.SetIn(reader);
+            
+            //Act
+            Program.Main(new string[0]);
+            
+            //Assert
+            var result = writer.GetStringBuilder().ToString().Trim();
+            //Could not figure out how to trim the stringbuilder to only showing the last line of the console output.
+            //Therefore this is contains instead of equal
+            Assert.Contains("yay", result);
+        }
+        
+        [Fact]
+        public void Main_console_prints_nay_when_user_inputs_1900_bc_its_not_a_leapyear()
+        {
+            //Arrange
+            var writer = new StringWriter();
+            var reader = new StringReader("1900");
+            Console.SetOut(writer);
+            Console.SetIn(reader);
+            
+            //Act
+            Program.Main(new string[0]);
+            
+            //Assert
+            var result = writer.GetStringBuilder().ToString().Trim();
+            //Could not figure out how to trim the stringbuilder to only showing the last line of the console output.
+            //Therefore this is contains instead of equal
+            Assert.Contains("nay", result);
         }
     }
 }
