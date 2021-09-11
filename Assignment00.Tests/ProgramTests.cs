@@ -95,5 +95,31 @@ namespace Assignment00.Tests
             //Therefore this is contains instead of equal
             Assert.Contains("nay", result);
         }
+
+        [Fact]
+        public void Main_throws_FormatException_when_given_something_not_convertible_to_int()
+        {
+            //Arrange
+            var reader = new StringReader("hej");
+            Console.SetIn(reader);
+            
+            //Act
+
+            //Assert
+            Assert.Throws<FormatException>(() => Program.Main(new string[0]));
+        }
+        
+        [Fact]
+        public void Main_throws_ArgumentException_when_given_a_year_before_1582()
+        {
+            //Arrange
+            var reader = new StringReader("1581");
+            Console.SetIn(reader);
+            
+            //Act
+
+            //Assert
+            Assert.Throws<ArgumentException>(() => Program.Main(new string[0]));
+        }
     }
 }

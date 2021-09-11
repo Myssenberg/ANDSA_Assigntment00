@@ -7,37 +7,59 @@ namespace Assignment00
         public static void Main(string[] args)
         {
             Console.WriteLine("Enter a year: ");
-            int inputYear = Convert.ToInt32(Console.ReadLine());
-            Program p = new Program();
+            try
+            {
+                int inputYear = Convert.ToInt32(Console.ReadLine());
+                Program p = new Program();
 
-            if (p.IsLeapYear(inputYear))
-            {
-                Console.WriteLine("yay");
+                if (p.IsLeapYear(inputYear))
+                {
+                    Console.WriteLine("yay");
+                }
+                else
+                {
+                    Console.WriteLine("nay");
+                }
             }
-            else
+            catch (FormatException e)
             {
-                Console.WriteLine("nay");
+                throw new FormatException("Please write a number");
             }
+            catch (ArgumentException e)
+            {
+                throw e;
+            }
+            
+            
+            
         }
 
         public bool IsLeapYear(int year)
         {
-            if (year % 400 == 0)
+            if (year < 1582)
             {
-                return true;
-            } 
-            else if (year % 100 == 0)
-            {
-                return false;
-            }
-            else if (year % 4 == 0)
-            {
-                return true;
+                throw new ArgumentException("Please write a year later than or equal to 1582");
             }
             else
             {
-                return false;
+                if (year % 400 == 0)
+                {
+                    return true;
+                } 
+                else if (year % 100 == 0)
+                {
+                    return false;
+                }
+                else if (year % 4 == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
+            
             
         }
     }
